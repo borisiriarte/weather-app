@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { subNavigation } from "../constants";
+import { Link } from "react-router-dom";
 
 const navName = localStorage.getItem("nav");
 
@@ -9,6 +10,7 @@ const Subnav = () => {
     localStorage.setItem("nav", `${name}`);
     setActive(name);
   }
+
   return (
     <div className="absolute w-full top-20 left-0 px-4 sm:px-16 ">
       <ul className="flex list-none w-full h-14 justify-around items-center font-roboto_condensed text-base">
@@ -20,7 +22,7 @@ const Subnav = () => {
             } cursor-pointer sm:text-2xl text-[16px]`}
             onClick={(e) => handleActive(e, nav.name)}
           >
-            <a href={`${nav.href}`}>{nav.name}</a>
+            <Link to={`/${nav.href}`}>{nav.name}</Link>
           </li>
         ))}
       </ul>
