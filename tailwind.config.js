@@ -6,7 +6,7 @@ export default {
       colors: {
         primary: "#2a2e35",
         secondary: "#C89243",
-        cHover: "#131518",
+        cHover: "#1c1f24",
         cActive: "#070809",
       },
       fontFamily: {

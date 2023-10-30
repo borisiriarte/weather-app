@@ -3,28 +3,27 @@ import { Logo } from "../assets/img/index";
 import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
-
-const searchBarClass =
-  "w-[50vw] hidden sm:flex relative border-[1px] border-secondary rounded-md";
+import style from "../style";
+import { Glass } from "../assets/img";
 
 const Header = () => {
   return (
-    <div className="w-full h-20 bg-primary fixed top-0 left-0 flex justify-between items-center px-4 font-sansation">
-      <div className="flex justify-center items-center relative">
-        <Link to="/" className="cursor-pointer">
+    <div
+      className={`w-full h-20 font-sansation bg-primary fixed top-0 left-0 flex justify-between items-center px-4 text-white`}
+    >
+      <div className={`${style.flexCenter} relative`}>
+        <Link to="/locations" className="cursor-pointer">
           <img src={`${Logo}`} alt="Logo" className="scale-90 sm:scale-105 " />
         </Link>
-        <div className="absolute left-5 top-5 text-[#2a2e35] font-sansation pointer-events-none">
+        <div className="absolute left-5 top-5 text-primary pointer-events-none">
           28°
         </div>
-        <div className="flex flex-col justify-center items-center ml-1">
-          <h1 className="text-[20px] leading-none text-secondary">BOLIVIA</h1>
-          <div className="text-[12px] leading-none text-white font-roboto ">
-            cochabamba
-          </div>
+        <div className="flex flex-col justify-center items-center ">
+          <h1 className="text-xl leading-none text-secondary">BOLIVIA</h1>
+          <div className="text-xs  leading-nonefont-roboto ">cochabamba</div>
         </div>
       </div>
-      <SearchBar data={searchBarClass} />
+      <SearchBar />
       <Navbar />
     </div>
   );

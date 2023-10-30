@@ -88,3 +88,16 @@ body {
     -webkit-transform: translateX(100%);
   }
 }
+
+::-webkit-scrollbar-track {
+  background: #2a2e35;
+}
+
+::-webkit-scrollbar {
+  width: auto;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c89243;
+  border-radius: 12px;
+}

@@ -26,9 +26,12 @@ const CurrentData = () => {
           </div>
         </div>
       </div>
-      <div className="w-full h-64 border-white border-[1px] rounded-xl  sm:h-[75vh] flex flex-col justify-around px-4 sm:px-6">
-        {currentForecast.map((data) => (
-          <div className="flex justify-between border-b-[1px] border-b-white text-base sm:text-2xl ">
+      <div className="w-full h-64 border-white border-[1px] rounded-xl sm:h-[75vh] flex flex-col justify-around px-4 sm:px-6">
+        {currentForecast.map((data, index) => (
+          <div
+            key={index}
+            className="flex justify-between border-b-[1px] border-b-white text-base sm:text-2xl "
+          >
             <div>{data.name}</div>
             <div>{data.info}</div>
           </div>

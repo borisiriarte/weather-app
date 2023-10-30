@@ -1,17 +1,16 @@
 import React from "react";
 import { Glass } from "../assets/img";
 
-const SearchBar = ({ data }) => {
+const SearchBar = () => {
   return (
     <div
-      className={`${data} h-10 absolute border-[1px] rounded-md flex items-center`}
+      className={`relative h-10 w-[50vw] hidden sm:flex  items-center border-[1px]  border-secondary rounded-md`}
     >
       <input
         type="search"
         name="Search"
-        id=""
         placeholder={"Search..."}
-        className="w-full  bg-transparent  pl-14  pr-4 rounded-md   focus:outline-none text-white"
+        className="w-full bg-transparent pl-14 pr-4 rounded-md focus:outline-none sm:block hidden"
       />
       <img
         src={`${Glass}`}

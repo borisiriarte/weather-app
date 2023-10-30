@@ -14,6 +14,9 @@ const LocationContainer = () => {
           <div className="border-white border-[1px] rounded-md px-2 h-8 grid place-content-center cursor-pointer hover:bg-secondary hover:text-primary hover:border-none duration-700">
             Cochabamba
           </div>
+          <div className="border-white border-[1px] rounded-md px-2 h-8 grid place-content-center cursor-pointer hover:bg-secondary hover:text-primary hover:border-none duration-700">
+            La Paz
+          </div>
         </div>
       </div>
     </>

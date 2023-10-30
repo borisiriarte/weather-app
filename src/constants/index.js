@@ -24,7 +24,6 @@ export const navigation = [
     current: false,
   },
   { id: 5, name: "Maps", href: "maps", icon: [Map], current: false },
-  { id: 6, name: "Browse", href: "search", icon: [Glass], current: false },
 ];
 
 export const subNavigation = [
