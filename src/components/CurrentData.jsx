@@ -11,7 +11,7 @@ const currentForecast = [
 const CurrentData = () => {
   return (
     <>
-      <div className="w-full h-[414px] border-white border-[1px] rounded-xl mb-4 sm:mb-0 sm:h-[75vh]">
+      <div className="w-full h-[414px] border-white border-[1px] rounded-xl sm:h-[75vh]">
         <div className="h-full mx-6 flex flex-col  py-6 sm:py-8 justify-between items-center">
           <div className="text-center">
             <div className="text-2xl sm:text-4xl">CURRENT WEATHER</div>

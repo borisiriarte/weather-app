@@ -94,10 +94,11 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: auto;
+  width: 15px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #c89243;
   border-radius: 12px;
+  border: solid 4px #2a2e35;
 }

@@ -4,7 +4,6 @@ import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import style from "../style";
-import { Glass } from "../assets/img";
 
 const Header = () => {
   return (
@@ -12,7 +11,7 @@ const Header = () => {
       className={`w-full h-20 font-sansation bg-primary fixed top-0 left-0 flex justify-between items-center px-4 text-white`}
     >
       <div className={`${style.flexCenter} relative`}>
-        <Link to="/locations" className="cursor-pointer">
+        <Link to="/today" className="cursor-pointer">
           <img src={`${Logo}`} alt="Logo" className="scale-90 sm:scale-105 " />
         </Link>
         <div className="absolute left-5 top-5 text-primary pointer-events-none">

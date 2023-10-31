@@ -1,14 +1,14 @@
 import React from "react";
+import SubnavContainer from "../components/SubnavContainer";
 
 const Maps = () => {
   return (
     <>
-      <div className="absolute w-full h-14 top-20 left-0 px-4 sm:px-16 text-white">
-        <div className="flex list-none w-full h-14 justify-around items-center font-roboto_condensed sm:text-2xl text-base">
+      <SubnavContainer>
+        <div className="flex w-full h-11 sm:h-14 justify-center items-center font-roboto_condensed sm:text-2xl text-base border-b-white border-b-[1px]">
           MAPS
         </div>
-        <div className="border-b-white w-full border-b-[1px]"></div>
-      </div>
+      </SubnavContainer>
     </>
   );
 };

@@ -24,19 +24,6 @@ const MiniDataContainer = ({ children }) => {
           ))}
         </div>
       </div>
-      {/* <div className="w-full h-[35vh] border-[1px] border-white rounded-xl p-4 sm:px-6 sm:py-4 flex flex-col justify-between font-roboto_condensed">
-        <div className="flex justify-between items-center">
-          <DailyData />
-        </div>
-        <div className="w-fulrounded-xl flex flex-col justify-around gap-y-1">
-          {currentForecast.map((data) => (
-            <div className="flex justify-between border-b-[1px] border-b-white text-base">
-              <div>{data.name}</div>
-              <div>{data.info}</div>
-            </div>
-          ))}
-        </div>
-      </div> */}
     </>
   );
 };

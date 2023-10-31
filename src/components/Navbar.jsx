@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Menu, Cross, Glass } from "../assets/img/index";
 import { navigation } from "../constants";
 import { Link } from "react-router-dom";
 import useWindowsDimensions from "../hooks/useWindowDimensions";
-import { createPortal } from "react-dom";
+import Modal from "./Modal";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -13,51 +13,10 @@ const Navbar = () => {
 
   return (
     <>
-      {createPortal(
-        <div
-          className={`${
-            modal ? "flex" : "hidden"
-          } fixed left-0 top-0 w-full h-full bg-secondary/40 backdrop-blur-sm justify-center items-center text-white`}
-        >
-          <div className="relative w-[40vw] h-[30vh] bg-primary rounded-lg grid place-content-center  ">
-            <img
-              src={Cross}
-              alt="escape"
-              className="w-6 h-6 absolute right-2 top-2 pointer-events-auto cursor-pointer hover:bg-cHover  active:bg-cActive rounded-md"
-              onClick={(e) => {
-                setModal(!modal);
-              }}
-            />
-            <div className="c-scrollbar absolute w-3/4 h-3/4 inset-0 m-auto grid grid-rows-auto rounded-xl font-roboto text-2xl overflow-y-scroll overflow-x-hidden gap-y-1">
-              <div className="w-full max-h-max py-1 rounded-md self-center flex justify-center items-center bg-cHover/40 hover:bg-cHover active:bg-cActive text-white/70 pointer-events-auto cursor-pointer duration-300 ">
-                Español
-              </div>
-              <div className="w-full max-h-max py-1 rounded-md self-center flex justify-center items-center bg-cHover/40 hover:bg-cHover active:bg-cActive text-white/70 pointer-events-auto cursor-pointer duration-300 ">
-                Español
-              </div>
-              <div className="w-full max-h-max py-1 rounded-md self-center flex justify-center items-center bg-cHover/40 hover:bg-cHover active:bg-cActive text-white/70 pointer-events-auto cursor-pointer duration-300 ">
-                Español
-              </div>
-              <div className="w-full max-h-max py-1 rounded-md self-center flex justify-center items-center bg-cHover/40 hover:bg-cHover active:bg-cActive text-white/70 pointer-events-auto cursor-pointer duration-300 ">
-                Español
-              </div>
-              <div className="w-full max-h-max py-1 rounded-md self-center flex justify-center items-center bg-cHover/40 hover:bg-cHover active:bg-cActive text-white/70 pointer-events-auto cursor-pointer duration-300 ">
-                Español
-              </div>
-              <div className="w-full max-h-max py-1 rounded-md self-center flex justify-center items-center bg-cHover/40 hover:bg-cHover active:bg-cActive text-white/70 pointer-events-auto cursor-pointer duration-300 ">
-                Español
-              </div>
-              <div className="w-full max-h-max py-1 rounded-md self-center flex justify-center items-center bg-cHover/40 hover:bg-cHover active:bg-cActive text-white/70 pointer-events-auto cursor-pointer duration-300 ">
-                Español
-              </div>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
+      <Modal data={{ Cross, modal, setModal }} />
 
       <div className="flex items-center ">
-        <div className="hover:bg-cHover active:bg-cActive duration-700 rounded-xl w-12 sm:w-14 sm:h-14 h-12 flex justify-center items-center cursor-pointer">
+        <div className="sm:hidden hover:bg-cHover active:bg-cActive duration-700 rounded-xl w-12 sm:w-14 sm:h-14 h-12 flex justify-center items-center cursor-pointer">
           <img src={`${Glass}`} className="w-6 block sm:hidden" />
         </div>
         <div className="hover:bg-cHover active:bg-cActive duration-700 rounded-xl w-12 sm:w-14 sm:h-14 h-12 flex justify-center items-center cursor-pointer">
@@ -88,9 +47,13 @@ const Navbar = () => {
                     className="h-16 w-full sm:h-full flex sm:flex-col-reverse justify-between items-center sm:justify-center px-4 sm:px-0 hover:bg-cHover active:bg-cActive duration-700 rounded-xl sm:text-xl"
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (nav.id === 2 || nav.id === 3) {
+                      if (nav.id === 2) {
                         setModal(!modal);
                       }
+                      if (nav.id === 3) {
+                        setModal(!modal);
+                      }
+
                       setToggle(!toggle);
                     }}
                   >
