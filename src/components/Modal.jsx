@@ -1,13 +1,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import { useDispatch, useSelector } from "react-redux";
 
-const Modal = ({ data }) => {
-  const dispatch = useDispatch();
-  const lang = useSelector((state) => state.language);
-
-  console.log(lang);
-
+const Modal = ({ data, children }) => {
   return (
     <>
       {createPortal(
@@ -21,10 +15,12 @@ const Modal = ({ data }) => {
               src={data.Cross}
               alt="escape"
               className="w-6 h-6 absolute right-2 top-2 pointer-events-auto cursor-pointer hover:bg-cHover  active:bg-cActive rounded-md"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 data.setModal(!data.modal);
               }}
             />
+            {children}
           </div>
         </div>,
         document.body

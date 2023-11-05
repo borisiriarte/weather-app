@@ -4,6 +4,7 @@ import { navigation } from "../constants";
 import { Link } from "react-router-dom";
 import useWindowsDimensions from "../hooks/useWindowDimensions";
 import Modal from "./Modal";
+import ModalContent from "./ModalContent";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -13,7 +14,9 @@ const Navbar = () => {
 
   return (
     <>
-      <Modal data={{ Cross, modal, setModal }} />
+      <Modal data={{ Cross, modal, setModal }}>
+        <ModalContent />
+      </Modal>
 
       <div className="flex items-center ">
         <div className="sm:hidden hover:bg-cHover active:bg-cActive duration-700 rounded-xl w-12 sm:w-14 sm:h-14 h-12 flex justify-center items-center cursor-pointer">

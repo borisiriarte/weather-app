@@ -1,6 +1,4 @@
-import React from "react";
 import { CHANGE_LANGUAGE } from "../types";
-import useLanguage from "../hooks/useLanguage";
 
 const initialState = "en";
 
