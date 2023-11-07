@@ -10,7 +10,7 @@ const Today = () => {
   const weather = useOutletContext();
   const { today } = weather;
 
-  console.log(today);
+  // console.log(today);
 
   return (
     <>
@@ -18,7 +18,7 @@ const Today = () => {
         <Loader />
       ) : (
         <DataContainer data={responsive}>
-          <CurrentData data={today[0]} />
+          {/* <CurrentData data={today[0]} /> */}
         </DataContainer>
       )}
       {/* <DataContainer data={responsive}>

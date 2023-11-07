@@ -28,17 +28,20 @@ const CurrentData = ({ data }) => {
       <div className="w-full h-[414px] border-white border-[1px] rounded-xl sm:h-[75vh]">
         <div className="h-full mx-6 flex flex-col  py-6 sm:py-8 justify-between items-center">
           <div className="text-center">
-            <div className="text-2xl sm:text-4xl">CURRENT WEATHER</div>
+            <div className="text-2xl sm:text-4xl">
+              {current.condition.text.toUpperCase()}
+            </div>
             <p className="text-base sm:text-2xl text-white/60">{strDate}</p>
           </div>
           <i className="wi wi-forecast-io-clear-day text-secondary text-[180px] sm:text-[200px]"></i>
-          <div className="flex items-center justify-center w-full gap-3 ">
-            <div className="text-5xl sm:text-6xl ">{`${Math.floor(
-              current.temp_c
-            )}°`}</div>
-            <p className="text-4xl sm:text-5xl ">
-              {current.condition.text.toUpperCase()}
-            </p>
+          <div className="flex items-center justify-center w-full box-border">
+            <div className="text-5xl sm:text-6xl relative">
+              {`${Math.floor(current.temp_c)}`}°
+              <sub className="absolute bottom-[-1px]  left-[51px]  sm:bottom-[2px] sm:left-[65px] text-xl">
+                F
+              </sub>
+            </div>
+            {/* <div className="text-3xl sm:text-4xl text-center"></div> */}
           </div>
         </div>
       </div>

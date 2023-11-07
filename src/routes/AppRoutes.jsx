@@ -13,10 +13,10 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path={`/`} element={<Main />}>
-        <Route index element={<Today />}></Route>
+        {/* <Route index element={<Today />}></Route>
         <Route path="today" element={<Today />} />
         <Route path="daily" element={<Daily />} />
-        <Route path="hourly" element={<Hourly />} />
+        <Route path="hourly" element={<Hourly />} /> */}
       </Route>
       <Route path="locations" element={<Location />} />
       <Route path="maps" element={<Maps />} />

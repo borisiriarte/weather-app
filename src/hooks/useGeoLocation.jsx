@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 const useGeoLocation = () => {
-  const [response, setResponse] = useState({});
+  const [response, setResponse] = useState({ status: 0 });
   const options = {
     enableHighAccuracy: true,
     maximumAge: 0,
@@ -22,17 +22,29 @@ const useGeoLocation = () => {
       const coords = position.coords;
       res.lat = coords.latitude;
       res.long = coords.longitude;
-      res.result = "allowed";
     } catch (err) {
       res.err = err;
-      res.result = "denied";
     }
 
     return res;
   };
 
   useEffect(() => {
-    getGeoResponse().then((coords) => setResponse({ ...response, coords }));
+    getGeoResponse().then((res) => {
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then((permissionStatus) => {
+          navigator.geolocation;
+
+          if (permissionStatus.state === "granted") {
+            setResponse({ ...response, res, status: 1 });
+          }
+
+          if (permissionStatus.state === "denied") {
+            setResponse({ ...response, res, status: 2 });
+          }
+        });
+    });
   }, []);
 
   return response;
