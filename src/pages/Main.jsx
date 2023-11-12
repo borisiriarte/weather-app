@@ -1,70 +1,136 @@
 import React, { useEffect, useState } from "react";
-import Subnav from "../components/Subnav";
-import { Outlet, useLocation } from "react-router-dom";
-import SubnavContainer from "../components/SubnavContainer";
-import useGeoLocation from "../hooks/useGeoLocation";
+import SearchBar from "../components/SearchBar";
+import { Logo } from "../assets/img";
 import { helpUserLocation } from "../helpers/helpUserLocation";
-import { useDispatch, useSelector } from "react-redux";
 import { helpHttp } from "../helpers/helpHttp";
+import { weather_icons } from "../assets/weather_icons";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import { currentWeather } from "../actions/WeatherActions";
+import updateStorage from "../helpers/helpUpdateStorage";
+import wetaher_url from "../constants/url";
+
+const styles = `relative h-14 w-4/5 border-white`;
 
 const Main = () => {
-  const dispatch = useDispatch();
   const weather = useSelector((state) => state.weather);
-  const [ipLocation, setUIpLocation] = useState({});
+  const dispatch = useDispatch();
+  const nagivate = useNavigate();
 
-  const uri = "http://api.weatherapi.com/v1";
-  const KEY = "0329114cb704414cbc2233320220912";
-  const base = `${uri}/current.json?key=${KEY}`;
-  const aqi = "&aqui=yes";
+  const current = weather.today.current;
+  const location = weather.today.location;
+  let storage = JSON.parse(localStorage.getItem("recentLocations"));
 
-  const location = useGeoLocation();
-  let lat;
-  let long;
+  const getCurrentLocation = async () => {
+    const userLocation = await helpUserLocation();
 
-  const isAllowed = async () => {
-    let coordinates;
-    let url;
+    const lat = userLocation.latitude;
+    const long = userLocation.longitude;
 
-    if (location.status > 0) {
-      if (location.status === 1) {
-        lat = location.res.lat;
-        long = location.res.long;
-        coordinates = `&q=${lat},${long}`;
-        url = base + coordinates + aqi;
-        await helpHttp()
-          .get(url)
-          .then((res) => {
-            console.log(res);
-            dispatch(currentWeather(res));
-          });
-      }
+    const coordinates = `&q=${lat},${long}`;
+    const url = wetaher_url("current", coordinates);
 
-      if (location.status === 2) {
-        const userLocation = await helpUserLocation();
-        lat = userLocation.latitude;
-        long = userLocation.longitude;
-        coordinates = `&q=${lat},${long}`;
-        url = base + coordinates + aqi;
-        await helpHttp()
-          .get(url)
-          .then((res) => {
-            console.log(res);
-            dispatch(currentWeather(res));
-          });
-      }
-    }
+    await helpHttp()
+      .get(url)
+      .then((res) => {
+        console.log(res);
+        dispatch(currentWeather(res));
+      });
   };
 
+  const goTo = () => {
+    nagivate("/weather");
+    const { name, country, lat, lon } = weather.today.location;
+    updateStorage({ name, country, lat, lon });
+  };
+  let loc = useLocation();
+
   useEffect(() => {
-    isAllowed();
-  }, [dispatch, location]);
+    if (weather?.today?.current === undefined) {
+      getCurrentLocation();
+    }
+
+    if (localStorage.getItem("recentLocations") === null) {
+      localStorage.setItem("recentLocations", "[]");
+    }
+  }, []);
+
   return (
     <>
-      <SubnavContainer>
-        <Subnav />
-      </SubnavContainer>
-      <Outlet context={weather} />
+      <div className={`w-full flex items-center font-sansation pl-2 py-3`}>
+        <img src={`${Logo}`} alt="Logo" className="scale-75 sm:scale-105" />
+        <h1 className="sm:text-xl text-base leading-none text-secondary -ml-1 sm:ml-2">
+          CLIMATE
+        </h1>
+      </div>
+      <div className="w-full grid place-content-center sm:my-6 my-0 mb-6">
+        <div className="w-[90vw]  sm:w-[80vw] h-[600px]  rounded-xl backdrop-blur-3xl bg-cHover/30 flex flex-col items-center justify-center sm:gap-y-3 gap-y-2">
+          <SearchBar
+            data={styles}
+            cross={
+              "bg-white active:shadow-inner active:shadow-primary/50 rounded-tr-[4px] rounded-br-[4px]"
+            }
+          />
+          <div className="text-center text-xs text-white font-roboto">
+            RECENT LOCATIONS
+          </div>
+          <div
+            className={`w-4/5 h-[75%] grid sm:grid-cols-2 grid-cols-1 sm:grid-rows-2 grid-rows-4 gap-1 text-white font-roboto`}
+          >
+            <div
+              className="backdrop-blur-3xl bg-cHover/10 rounded-md px-4 py-2 sm:p-5 font-roboto grid grid-cols-2 cursor-pointer"
+              onClick={goTo}
+            >
+              {weather?.today?.current !== undefined && (
+                <>
+                  <div className="flex flex-col justify-between">
+                    <div>
+                      <h1 className="text-base sm:text-xl">{location.name}</h1>
+                      <p className="text-xs text-white/60">
+                        {location.country}
+                      </p>
+                    </div>
+                    <div>
+                      <div className="text-base sm:text-xl">
+                        {Math.floor(current["temp_c"])}°
+                      </div>
+                      <p className="text-xs text-white/60">
+                        Feels Like
+                        {Math.floor(current["feelslike_c"])}°
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex justify-end items-center">
+                    <i
+                      className={`wi ${
+                        current["is_day"] === 0
+                          ? weather_icons[`${current.condition.code}`].night
+                          : weather_icons[`${current.condition.code}`].day
+                      } text-secondary text-[50px] sm:text-[90px] md:text-[120px] leading-none`}
+                    ></i>
+                  </div>
+                </>
+              )}
+            </div>
+
+            {storage?.length !== undefined &&
+              storage.map((x, index) => (
+                <div
+                  className="backdrop-blur-3xl bg-cHover/10 rounded-md px-4 py-2 sm:p-5 font-roboto grid grid-cols-2 cursor-pointer "
+                  key={index}
+                >
+                  <div className="flex flex-col justify-between">
+                    <div>
+                      <h1 className="text-base sm:text-xl">{x.name}</h1>
+                      <p className="text-xs text-white/60">{x.country}</p>
+                    </div>
+                    <p className="text-xs">{`${x.lat} , ${x.lon}`}</p>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
     </>
   );
 };

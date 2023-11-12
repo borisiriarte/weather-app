@@ -3,6 +3,7 @@ import {
   CURRENT_WEATHER,
   FORECAST_WEATHER_DAILY,
   FORECAST_WEATHER_HOURLY,
+  RELOCATE_DATA,
 } from "../types";
 
 export const currentWeather = (location) => ({
@@ -22,5 +23,10 @@ export const dailyWeather = (location) => ({
 
 export const astronomy = (location) => ({
   type: ASTRONOMY,
+  payload: location,
+});
+
+export const relocateData = (location) => ({
+  type: RELOCATE_DATA,
   payload: location,
 });

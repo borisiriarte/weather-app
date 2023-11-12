@@ -5,13 +5,15 @@ import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import style from "../style";
 
+const styles = `relative h-10  w-2/4 border-secondary`;
+
 const Header = () => {
   return (
     <div
       className={`w-full h-20 font-sansation bg-primary fixed top-0 left-0 flex justify-between items-center px-4 text-white`}
     >
       <div className={`${style.flexCenter} relative`}>
-        <Link to="/today" className="cursor-pointer">
+        <Link to="/" className="cursor-pointer">
           <img src={`${Logo}`} alt="Logo" className="scale-90 sm:scale-105 " />
         </Link>
         <div className="absolute left-5 top-5 text-primary pointer-events-none">
@@ -22,7 +24,10 @@ const Header = () => {
           <div className="text-xs  leading-nonefont-roboto ">cochabamba</div>
         </div>
       </div>
-      <SearchBar />
+      <SearchBar
+        data={styles}
+        cross={"w-10 h-10 rounded-full active:bg-cHover"}
+      />
       <Navbar />
     </div>
   );
