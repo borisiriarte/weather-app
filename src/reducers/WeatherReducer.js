@@ -1,25 +1,25 @@
-import {
-  ASTRONOMY,
-  CURRENT_WEATHER,
-  FORECAST_WEATHER_DAILY,
-  FORECAST_WEATHER_HOURLY,
-} from "../types";
+import { ASTRONOMY, FORECAST } from "../types";
 
 const initialState = {
   today: {},
+  daily: [],
+  hourly: {},
+  astronomy: {},
+  location: {},
 };
 
 function WeatherReducer(state = initialState, action) {
   switch (action.type) {
-    case CURRENT_WEATHER:
-      return { ...state, today: action.payload };
-    case FORECAST_WEATHER_DAILY:
-      return { ...state, day: action.payload };
-    case FORECAST_WEATHER_HOURLY:
-      return { ...state, hour: action.payload };
+    case FORECAST:
+      return {
+        ...state,
+        today: action.payload.current,
+        daily: action.payload.forecast.forecastday,
+        hourly: action.payload.forecast.forecastday[0],
+        location: action.payload.location,
+      };
     case ASTRONOMY:
       return { ...state, atronomy: action.payload };
-
     default:
       return state;
   }

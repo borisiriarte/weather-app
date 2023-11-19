@@ -1,4 +1,13 @@
 {
   "id": 1,
-  "lanName": "es"
+  "lanName": "es",
+  "language": "Español",
+  "lan": "Lenguaje",
+  "name": "nombre",
+  "means": "significa",
+  "lang": "es-ES",
+  "uv": "Índice UV",
+  "aqi": "Calidad ",
+  "search": "Buscar",
+  "system": "Unidades de Medida"
 }

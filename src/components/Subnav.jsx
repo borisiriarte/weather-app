@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { subNavigation } from "../constants";
 import { Link, useLocation } from "react-router-dom";
 import { t } from "i18next";
@@ -12,11 +12,13 @@ const Subnav = () => {
       {subNavigation.map((nav) => (
         <li
           key={nav.id}
-          className={` ${
-            nav.href === path ? "text-secondary" : "text-white"
-          } cursor-pointer sm:text-2xl text-base transition-colors duration-500`}
+          className={`${
+            path.includes(nav.href) ? "text-secondary" : "text-white"
+          } cursor-pointer sm:text-2xl text-base transition-colors duration-500 `}
         >
-          <Link to={`${nav.href}`}>{nav.name}</Link>
+          <Link to={`/${t("lanName")}/weather/${nav.href}`}>
+            {nav[t("name")]}
+          </Link>
         </li>
       ))}
     </ul>

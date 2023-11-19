@@ -1,59 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SearchBar from "../components/SearchBar";
 import { Logo } from "../assets/img";
-import { helpUserLocation } from "../helpers/helpUserLocation";
-import { helpHttp } from "../helpers/helpHttp";
+
 import { weather_icons } from "../assets/weather_icons";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { currentWeather } from "../actions/WeatherActions";
+import { useNavigate } from "react-router-dom";
 import updateStorage from "../helpers/helpUpdateStorage";
-import wetaher_url from "../constants/url";
+import { useTranslation } from "react-i18next";
+import weather_url from "../constants/url";
+import { helpHttp } from "../helpers/helpHttp";
+import { forecast } from "../actions/WeatherActions";
 
 const styles = `relative h-14 w-4/5 border-white`;
 
 const Main = () => {
   const weather = useSelector((state) => state.weather);
   const dispatch = useDispatch();
-  const nagivate = useNavigate();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
-  const current = weather.today.current;
-  const location = weather.today.location;
+  const current = weather.today;
+  const location = weather.location;
   let storage = JSON.parse(localStorage.getItem("recentLocations"));
 
-  const getCurrentLocation = async () => {
-    const userLocation = await helpUserLocation();
+  const goTo = () => {
+    navigate(
+      `/${t("lanName")}/weather/${location.country}/${location.name}/lat=${
+        location.lat
+      },lon=${location.lon}`
+    );
+    const { name, country, lat, lon } = weather.location;
+    updateStorage({ name, country, lat, lon });
+  };
 
-    const lat = userLocation.latitude;
-    const long = userLocation.longitude;
-
-    const coordinates = `&q=${lat},${long}`;
-    const url = wetaher_url("current", coordinates);
+  const handleFindOnClick = async (coordinates) => {
+    const { lat, lon } = coordinates;
+    const coordinatesQuery = `&q=${lat},${lon}`;
+    const url = weather_url("forecast", coordinatesQuery);
+    let loc;
 
     await helpHttp()
       .get(url)
       .then((res) => {
-        console.log(res);
-        dispatch(currentWeather(res));
-      });
+        dispatch(forecast(res));
+        loc = res.location;
+        const { name, country, lat, lon } = res.location;
+        updateStorage({ name, country, lat, lon });
+      })
+      .catch((err) => console.error(err));
+
+    navigate(
+      `/${t("lanName")}/weather/${loc.country}/${loc.name}/lat=${loc.lat},lon=${
+        loc.lon
+      }`
+    );
   };
-
-  const goTo = () => {
-    nagivate("/weather");
-    const { name, country, lat, lon } = weather.today.location;
-    updateStorage({ name, country, lat, lon });
-  };
-  let loc = useLocation();
-
-  useEffect(() => {
-    if (weather?.today?.current === undefined) {
-      getCurrentLocation();
-    }
-
-    if (localStorage.getItem("recentLocations") === null) {
-      localStorage.setItem("recentLocations", "[]");
-    }
-  }, []);
 
   return (
     <>
@@ -81,7 +82,7 @@ const Main = () => {
               className="backdrop-blur-3xl bg-cHover/10 rounded-md px-4 py-2 sm:p-5 font-roboto grid grid-cols-2 cursor-pointer"
               onClick={goTo}
             >
-              {weather?.today?.current !== undefined && (
+              {weather.today?.cloud !== undefined && (
                 <>
                   <div className="flex flex-col justify-between">
                     <div>
@@ -118,6 +119,7 @@ const Main = () => {
                 <div
                   className="backdrop-blur-3xl bg-cHover/10 rounded-md px-4 py-2 sm:p-5 font-roboto grid grid-cols-2 cursor-pointer "
                   key={index}
+                  onClick={(e) => handleFindOnClick({ lat: x.lat, lon: x.lon })}
                 >
                   <div className="flex flex-col justify-between">
                     <div>

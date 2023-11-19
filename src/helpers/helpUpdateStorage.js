@@ -1,4 +1,5 @@
 const updateStorage = (element) => {
+  // console.log(element);
   const { lat, lon } = element;
   const locations = JSON.parse(localStorage.getItem("recentLocations"));
 
@@ -7,11 +8,11 @@ const updateStorage = (element) => {
   });
 
   if (Object.keys(locations).length > 2) {
-    locations.shift();
+    locations.pop();
   }
 
   if (exists === undefined) {
-    locations.push(element);
+    locations.unshift(element);
   }
 
   var updatedLocations = JSON.stringify(locations);

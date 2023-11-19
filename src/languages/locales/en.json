@@ -1,4 +1,13 @@
 {
   "id": 0,
-  "lanName": "en"
+  "lanName": "en",
+  "language": "English",
+  "lan": "Language",
+  "name": "name",
+  "means": "means",
+  "lang": "en-EN",
+  "uv": "UV Index",
+  "aqi": "Air Quality",
+  "search": "Search",
+  "system": "Units Of Mesurement"
 }

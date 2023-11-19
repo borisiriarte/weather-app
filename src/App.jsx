@@ -1,10 +1,11 @@
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import "./App.css";
 import Header from "./components/Header";
 import store from "./store";
 import AppRoutes from "./routes/AppRoutes";
 import Main from "./pages/Main";
 import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const searchBarClass =
   " w-[90vw] mt-24 inset-0 mx-auto border-white sm:hidden flex";
