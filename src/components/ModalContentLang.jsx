@@ -35,7 +35,7 @@ const ModalContentLang = () => {
               localStorage.setItem("language", el.value);
               const pathname = window.location.pathname;
 
-              window.location.pathname = "/" + el.value + pathname.slice(3);
+              window.location.pathname = el.value + pathname.slice(3);
             }
           }}
         >

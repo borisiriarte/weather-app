@@ -17,7 +17,6 @@ import { useTranslation } from "react-i18next";
 
 const AppRoutes = () => {
   const weather = useSelector((state) => state.weather);
-  const location = weather.location;
   const dispatch = useDispatch();
   let storage = JSON.parse(localStorage.getItem("recentLocations"));
 
@@ -71,12 +70,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Main />} />
-      <Route
-        path={`${t("lanName")}/weather/${location.country}/${
-          location.name
-        }/lat=${location.lat},lon=${location.lon}`}
-        element={<MainData />}
-      >
+      <Route path={`${t("lanName")}/weather`} element={<MainData />}>
         <Route index element={<Today />}></Route>
         <Route path="today" element={<Today />} />
         <Route path="daily" element={<Daily />} />

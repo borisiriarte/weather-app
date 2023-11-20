@@ -24,11 +24,7 @@ const Main = () => {
   let storage = JSON.parse(localStorage.getItem("recentLocations"));
 
   const goTo = () => {
-    navigate(
-      `/${t("lanName")}/weather/${location.country}/${location.name}/lat=${
-        location.lat
-      },lon=${location.lon}`
-    );
+    navigate(`/${t("lanName")}/weather`);
     const { name, country, lat, lon } = weather.location;
     updateStorage({ name, country, lat, lon });
   };
@@ -49,11 +45,7 @@ const Main = () => {
       })
       .catch((err) => console.error(err));
 
-    navigate(
-      `/${t("lanName")}/weather/${loc.country}/${loc.name}/lat=${loc.lat},lon=${
-        loc.lon
-      }`
-    );
+    navigate(`/${t("lanName")}/weather`);
   };
 
   return (

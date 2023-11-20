@@ -75,11 +75,7 @@ const SearchBar = ({ data, cross }) => {
         })
         .catch((err) => console.error(err));
 
-      navigate(
-        `/${t("lanName")}/weather/${loc.country}/${loc.name}/lat=${
-          loc.lat
-        },lon=${loc.lon}`
-      );
+      navigate(`/${t("lanName")}/weather`);
     }
   };
 
@@ -101,8 +97,7 @@ const SearchBar = ({ data, cross }) => {
       });
 
     navigate(
-      `${t("lanName")}/weather/${loc.country}/${loc.name}/lat=${loc.lat},lon=${
-        loc.lon
+      `${t("lanName")}/weather
       }`
     );
   }

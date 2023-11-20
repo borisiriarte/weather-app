@@ -2,9 +2,11 @@ import React from "react";
 import { subNavigation } from "../constants";
 import { Link, useLocation } from "react-router-dom";
 import { t } from "i18next";
+import { useSelector } from "react-redux";
 
 const Subnav = () => {
   const location = useLocation();
+  const weather = useSelector((state) => state.weather);
   let path = location.pathname.slice(1);
 
   return (
