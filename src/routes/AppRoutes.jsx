@@ -18,6 +18,7 @@ import { useTranslation } from "react-i18next";
 const AppRoutes = () => {
   const weather = useSelector((state) => state.weather);
   const dispatch = useDispatch();
+
   let storage = JSON.parse(localStorage.getItem("recentLocations"));
 
   const { t } = useTranslation();

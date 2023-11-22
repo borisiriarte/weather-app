@@ -5,7 +5,7 @@ import ES from "./locales/es.json";
 import { initReactI18next } from "react-i18next";
 
 i18n.use(initReactI18next).init({
-  lng: localStorage.getItem("language"),
+  lng: localStorage.getItem("language") || "en",
   resources: { en: { translation: EN }, es: { translation: ES } },
 });
 

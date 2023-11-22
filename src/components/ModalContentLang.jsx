@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { changeLanguage } from "../actions/languageActions";
 import i18n from "../languages";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const languages = [
   { id: 0, name: "English", value: "en" },
@@ -12,6 +13,7 @@ const languages = [
 const ModalContentLang = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLanguage = useCallback((clickedLang) => {
     i18n.changeLanguage(clickedLang);
@@ -33,9 +35,10 @@ const ModalContentLang = () => {
 
             if (localStorage.getItem("language") !== el.value) {
               localStorage.setItem("language", el.value);
-              const pathname = window.location.pathname;
+              // const pathname = window.location.pathname;
 
-              window.location.pathname = el.value + pathname.slice(3);
+              // window.location.pathname = el.value + "/weather";
+              navigate(`${el.value}/weather`);
             }
           }}
         >

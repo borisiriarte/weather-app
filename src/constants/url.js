@@ -1,4 +1,4 @@
-const DOMAIN = "http://api.weatherapi.com";
+const DOMAIN = "https://api.weatherapi.com";
 const API = `${DOMAIN}/v1`;
 const KEY = "0329114cb704414cbc2233320220912";
 const FORECAST_WEATHER_URL = `${API}/forecast.json?key=${KEY}`;

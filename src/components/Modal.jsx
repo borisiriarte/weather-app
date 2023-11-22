@@ -8,7 +8,7 @@ const Modal = ({ data, children }) => {
         <div
           className={`${
             data.modal ? "flex" : "hidden"
-          } fixed left-0 top-0 w-full h-full bg-primary/50 backdrop-blur-3xl  justify-center items-center text-white`}
+          } fixed left-0 top-0 w-full h-full bg-primary/50 backdrop-blur-sm  justify-center items-center text-white`}
         >
           <div
             className={`relative sm:w-[400px] w-72 h-64 bg-primary rounded-lg grid place-content-center `}

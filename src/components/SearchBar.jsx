@@ -91,15 +91,11 @@ const SearchBar = ({ data, cross }) => {
       .then((res) => {
         dispatch(forecast(res));
         loc = res.location;
-        console.log(loc);
         const { name, country, lat, lon } = res.location;
         updateStorage({ name, country, lat, lon });
       });
 
-    navigate(
-      `${t("lanName")}/weather
-      }`
-    );
+    navigate(`${t("lanName")}/weather`);
   }
 
   function error() {

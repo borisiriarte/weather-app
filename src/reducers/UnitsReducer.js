@@ -1,6 +1,6 @@
 import { CHANGE_UNITS } from "../types";
 
-const initialState = localStorage.getItem("unit");
+const initialState = localStorage.getItem("unit") || "m";
 
 function UnitsReducer(state = initialState, action) {
   switch (action.type) {

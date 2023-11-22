@@ -1,6 +1,6 @@
 import { CHANGE_LANGUAGE } from "../types";
 
-const initialState = localStorage.getItem("language");
+const initialState = localStorage.getItem("language") || "en";
 
 function LanguageReducer(state = initialState, action) {
   switch (action.type) {

@@ -24,7 +24,7 @@ const Main = () => {
   let storage = JSON.parse(localStorage.getItem("recentLocations"));
 
   const goTo = () => {
-    navigate(`/${t("lanName")}/weather`);
+    navigate(`${t("lanName")}/weather`);
     const { name, country, lat, lon } = weather.location;
     updateStorage({ name, country, lat, lon });
   };
